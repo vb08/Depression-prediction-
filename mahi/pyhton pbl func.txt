@@ -1,0 +1,52 @@
+from database import connect_db
+from hashlib import sha256
+def register_user(name, email, password, age, gender):
+    conn = connect_db()
+    cursor = conn.cursor()
+    try:
+        hashed_pw = sha256(password.encode()).hexdigest()
+        cursor.execute("INSERT INTO users (name, email, password, age, gender) VALUES (?, ?, ?, ?, ?)",
+                       (name, email, hashed_pw, age, gender))
+        conn.commit()
+        print("User registered successfully!\n")
+    except Exception as e:
+        print("Error:", e)
+    finally:
+        conn.close()
+def login_user(email, password):
+    conn = connect_db()
+    cursor = conn.cursor()
+    hashed_pw = sha256(password.encode()).hexdigest()
+    cursor.execute("SELECT id FROM users WHERE email=? AND password=?", (email, hashed_pw))
+    user = cursor.fetchone()
+    conn.close()
+    if user:
+        print("Login successful!\n")
+        return user[0] 
+    else:
+        print("Invalid email or password!\n")
+        return None
+
+def submit_response(user_id, sleep, stress, social, work, mood):
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute('''INSERT INTO responses (user_id, sleep_hours, stress_level, social_activity, work_pressure, mood_level)
+                      VALUES (?, ?, ?, ?, ?, ?)''',
+                   (user_id, sleep, stress, social, work, mood))
+    conn.commit()
+    conn.close()
+    print("Response saved successfully!\n")
+
+def show_stats():
+    conn = connect_db()
+    cursor = conn.cursor()
+    cursor.execute("SELECT AVG(sleep_hours), AVG(stress_level), COUNT(*) FROM responses")
+    avg_sleep, avg_stress, count = cursor.fetchone()
+    conn.close()
+
+    if count > 0:
+        print(f"Total Entries: {count}")
+        print(f"Average Sleep Hours: {avg_sleep:.2f}")
+        print(f"Average Stress Level: {avg_stress:.2f}\n")
+    else:
+        print("No data available yet.\n")

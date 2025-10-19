@@ -1,0 +1,30 @@
+import sqlite3
+
+DB_NAME = "depression_data.db"
+
+def create_tables():
+    conn = sqlite3.connect(DB_NAME)
+    cursor = conn.cursor()
+    cursor.execute('''CREATE TABLE IF NOT EXISTS users (
+                        id INTEGER PRIMARY KEY ,
+                        name VARCHAR(25) NOT NULL,
+                        email VARCHAR(25) UNIQUE NOT NULL,
+                        password VARCHAR(10) NOT NULL,
+                        age INTEGER,
+                        gender VARCHAR(10)
+                    )''')
+    cursor.execute('''CREATE TABLE IF NOT EXISTS responses (
+                        id INTEGER PRIMARY KEY ,
+                        user_id INTEGER,
+                        sleep_hours REAL,
+                        stress_level INTEGER,
+                        social_activity INTEGER,
+                        work_pressure INTEGER,
+                        mood_level INTEGER
+                    )''')
+
+    conn.commit()
+    conn.close()
+
+def connect_db():
+    return sqlite3.connect(DB_NAME)
