@@ -1,0 +1,104 @@
+import time  #used to create small delays (looks more natural)
+import random # (randomly,, select the quote )
+from colorama import Fore, Style, init #add colors and styles
+
+
+init(autoreset=True)  #to initilize colorama 
+
+def slow_print(text,delay=0.03):
+    for ch in text:
+        print(ch, end='', flush=True)
+        time.sleep(delay)
+    print()
+
+def depression_chatbot():
+    print(Fore.CYAN + "╔══════════════════════════════════════════════╗")
+    print(Fore.CYAN + "║       Welcome to the Mental Wellness Chatbot ║")
+    print(Fore.CYAN + "╚══════════════════════════════════════════════╝")
+    time.sleep(1)
+
+    name=input(Fore.YELLOW +"\nHey there! What's your name? ")
+    slow_print(Fore.GREEN + f"Hi {name},I'm here to help you take care of your mind and mood.\n")
+    time.sleep(1)
+
+    motivational_quotes=[
+        "You are stronger than you think, keep going.",
+        "Even the darkest night will end and the sun will rise.",
+        "Every day may not be good, but there's something good in every day.",
+        "Small steps every day lead to big changes."
+    ]
+
+    while True:
+        print(Fore.MAGENTA + "\nWhat would you like to do today?")
+        print(Fore.CYAN + "-"*50)
+        print("1. Predict Depression Level")
+        print("2. View Mental Health Statistics")
+        print("3. Get Self-Care Tips")
+        print("4. Contact a Psychiatrist or Helpline")
+        print("5. Learn About Depression")
+        print("6. Motivational Message")
+        print("7. Exit")
+        print(Fore.CYAN + "-"*50)
+
+        choice = input(Fore.YELLOW + "\nEnter your choice (1-7): ").strip()
+
+        if choice == '1':
+            sentence = input(Fore.WHITE + "\nPlease describe how you’ve been feeling lately:\n> ")
+            slow_print(Fore.GREEN + "Analyzing your response...")
+            time.sleep(1.5)
+            #has to insert data
+            slow_print(Fore.BLUE + "Prediction result: You might have mild depression.")
+            slow_print(Fore.YELLOW + "It’s okay — you’re not alone. Let’s work on getting better together!\n")
+
+        elif choice == '2':
+            print(Fore.CYAN + "\nDepression Statistics:")
+            time.sleep(0.5)
+            print(Fore.WHITE + "Mild: 45%")
+            print("Moderate: 35%")
+            print("Severe: 20%")
+            print(Fore.YELLOW + "Remember: Early awareness helps in healing.\n")
+
+        elif choice == '3':
+            print(Fore.GREEN + "\nSelf-Care Tips:")
+            tips = [
+                "Sleep 7–8 hours daily.",
+                "Eat healthy and drink plenty of water.",
+                "Go for a short walk outdoors.",
+                "Meditate or breathe deeply for 5 minutes.",
+                "Talk to someone you trust about how you feel."
+            ]
+            for tip in tips:
+                slow_print(Fore.WHITE + "- " + tip)
+                time.sleep(0.4)
+            print()
+
+        elif choice == '4':
+            print(Fore.CYAN + "\nMental Health Helplines (India):")
+            print(Fore.WHITE + "NIMHANS Helpline: 080-4611 0007")
+            print("AASRA Helpline: +91-9820466726")
+            print("Snehi Helpline: +91-9582208181")
+            print("Vandrevala Foundation: 9999 666 555\n")
+            print(Fore.YELLOW + "If you ever feel hopeless, please reach out — help is always available.\n")
+
+        elif choice == '5':
+            print(Fore.GREEN + "\nLearn About Depression:")
+            slow_print(Fore.WHITE + "Depression is a common but serious mental health condition.")
+            slow_print("It affects how you feel, think, and act, but it’s treatable.")
+            slow_print("Symptoms include sadness, fatigue, sleep issues, and low interest.")
+            slow_print(Fore.YELLOW + "Treatment includes therapy, medication, and emotional support.\n")
+
+        elif choice == '6':
+            print(Fore.CYAN + "\nHere’s a motivational message for you:")
+            print(Fore.WHITE + random.choice(motivational_quotes))
+            print(Fore.YELLOW + "Remember: You matter, and your feelings are valid.\n")
+
+        elif choice == '7':
+            slow_print(Fore.CYAN + f"\nThank you for visiting, {name}.Take care of your mind and body.")
+            slow_print(Fore.GREEN + "Remember — small steps make a big difference.")
+            break
+
+        else:
+            print(Fore.RED + "Invalid choice. Please choose a number between 1–7.\n")
+
+
+depression_chatbot()
