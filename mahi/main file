@@ -1,0 +1,52 @@
+from database import create_tables
+from func import register_user, login_user, submit_response, show_stats
+
+create_tables()
+
+def main_menu():
+    print("\n=== Depression Prediction (Backend) ===")
+    print("1. Register User")
+    print("2. Login")
+    print("3. Submit Depression Data")
+    print("4. View Stats")
+    print("5. Exit")
+
+current_user = None
+
+while True:
+    main_menu()
+    choice = input("Enter your choice: ")
+
+    if choice == "1":
+        name = input("Enter name: ")
+        email = input("Enter email: ")
+        password = input("Enter password: ")
+        age = int(input("Enter age: "))
+        gender = input("Enter gender (M/F): ")
+        register_user(name, email, password, age, gender)
+
+    elif choice == "2":
+        email = input("Enter email: ")
+        password = input("Enter password: ")
+        current_user = login_user(email, password)
+
+    elif choice == "3":
+        if current_user:
+            sleep = float(input("Enter sleep hours (0–24): "))
+            stress = int(input("Enter stress level (1–10): "))
+            social = int(input("Enter social activity (1–10): "))
+            work = int(input("Enter work pressure (1–10): "))
+            mood = int(input("Enter mood level (1–10): "))
+            submit_response(current_user, sleep, stress, social, work, mood)
+        else:
+            print("Please login first!\n")
+
+    elif choice == "4":
+        show_stats()
+
+    elif choice == "5":
+        print("Exiting...")
+        break
+
+    else:
+        print("Invalid choice! Try again.\n")
