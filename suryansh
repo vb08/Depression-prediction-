@@ -1,104 +1,153 @@
-import time  #used to create small delays (looks more natural)
-import random # (randomly,, select the quote )
-from colorama import Fore, Style, init #add colors and styles
+import time
+import random
+from colorama import Fore, Style, init
 
+init(autoreset=True)
 
-init(autoreset=True)  #to initilize colorama 
-
-def slow_print(text,delay=0.03):
+def slow_print(text, delay=0.03):
+   
     for ch in text:
         print(ch, end='', flush=True)
         time.sleep(delay)
     print()
 
+def show_menu():
+   
+    print(Fore.MAGENTA + "\nWhat would you like to do today?")
+    print(Fore.CYAN + "-" * 55)
+    options = [
+        "Predict Depression Level",
+        "View Mental Health Statistics",
+        "Get Self-Care Tips",
+        "Contact a Psychiatrist or Helpline",
+        "Learn About Depression",
+        "Motivational Message",
+        "Exit"
+    ]
+    for i, option in enumerate(options, start=1):
+        print(f"{i}. {option}")
+    print(Fore.CYAN + "-" * 55)
+
+def predict_depression(name):
+    
+    sentence = input(Fore.WHITE + "\nPlease describe how you’ve been feeling lately:\n> ").lower()
+    slow_print("Analyzing your response...")
+    time.sleep(1.5)
+
+    if any(word in sentence for word in ["sad", "hopeless", "tired", "down", "lonely", "depressed", "empty"]):
+        result = "You might be showing signs of moderate depression."
+    elif any(word in sentence for word in ["okay", "fine", "alright", "better", "good", "happy"]):
+        result = "You seem to be coping well, but it’s always good to check in with yourself."
+    else:
+        result = "Your emotions matter — it’s important to stay mindful and seek support if needed."
+    
+    slow_print(f"\nPrediction result: {result}")
+    slow_print("It’s okay — you’re not alone. Let’s work on getting better together!\n")
+
+    with open("wellness_log.txt", "a", encoding="utf-8") as log:
+        log.write(f"[{time.ctime()}] {name}: {sentence}\nPrediction: {result}\n\n")
+
+    input(Fore.MAGENTA + "\nPress Enter to return to the main menu...")
+
+def show_statistics():
+    print(Fore.CYAN + "\nDepression Statistics (General Overview):")
+    time.sleep(0.5)
+    print(Fore.WHITE + "Mild: 45%")
+    print("Moderate: 35%")
+    print("Severe: 20%")
+    print(Fore.YELLOW + "\nRemember: Early awareness helps in healing.\n")
+    input(Fore.MAGENTA + "Press Enter to return to the main menu...")
+
+def self_care_tips():
+    print(Fore.GREEN + "\nSelf-Care Tips:")
+    tips = [
+        "Sleep 7–8 hours daily.",
+        "Eat healthy and stay hydrated.",
+        "Go for a short walk outdoors.",
+        "Practice mindfulness or meditation.",
+        "Talk to someone you trust about your feelings."
+    ]
+    for tip in tips:
+        slow_print("- " + tip)
+        time.sleep(0.4)
+    print()
+    input(Fore.MAGENTA + "Press Enter to return to the main menu...")
+
+def helplines():
+    country = input(Fore.CYAN + "\nEnter your country (India/US/UK): ").strip().lower()
+    print(Fore.CYAN + "\nMental Health Helplines:")
+    if country == "india":
+        print(Fore.WHITE + "NIMHANS Helpline: 080-4611 0007")
+        print("AASRA Helpline: +91-9820466726")
+        print("Snehi Helpline: +91-9582208181")
+        print("Vandrevala Foundation: 9999 666 555")
+    elif country == "us":
+        print(Fore.WHITE + "988 Suicide and Crisis Lifeline: Dial 988 (24/7)")
+    elif country == "uk":
+        print(Fore.WHITE + "Samaritans: 116 123 (Free, 24/7)")
+    else:
+        print(Fore.YELLOW + "Sorry, helpline data not available for your country.")
+    print(Fore.YELLOW + "\nIf you ever feel hopeless, please reach out — help is always available.\n")
+    input(Fore.MAGENTA + "Press Enter to return to the main menu...")
+
+def learn_about_depression():
+    print(Fore.GREEN + "\nLearn About Depression:")
+    slow_print(+ "Depression is a common but serious mental health condition.")
+    slow_print("It affects how you feel, think, and act, but it’s treatable.")
+    slow_print("Symptoms include sadness, fatigue, and loss of interest.")
+    slow_print(Fore.CYAN + "Treatment includes therapy, medication, and emotional support.\n")
+    input(Fore.MAGENTA + "Press Enter to return to the main menu...")
+
+def motivational_message():
+    print(Fore.CYAN + "\nHere’s a motivational message for you:")
+    quotes = [
+        "You are stronger than you think — keep going.",
+        "Even the darkest night will end, and the sun will rise.",
+        "Every day may not be good, but there’s something good in every day.",
+        "Small steps every day lead to big changes.",
+        "You’ve made it through 100% of your bad days so far — that’s strength!"
+    ]
+    print(Fore.WHITE + random.choice(quotes))
+    print(Fore.YELLOW + "\nRemember: You matter, and your feelings are valid.\n")
+    input(Fore.MAGENTA + "Press Enter to return to the main menu...")
+
 def depression_chatbot():
+    """Main chatbot function."""
     print(Fore.CYAN + "╔══════════════════════════════════════════════╗")
     print(Fore.CYAN + "║       Welcome to the Mental Wellness Chatbot ║")
     print(Fore.CYAN + "╚══════════════════════════════════════════════╝")
     time.sleep(1)
 
-    name=input(Fore.YELLOW +"\nHey there! What's your name? ")
-    slow_print(Fore.GREEN + f"Hi {name},I'm here to help you take care of your mind and mood.\n")
+    name = input("\nHey there! What's your name? ").strip().title() or "Friend"
+    slow_print(f"Hi {name}, I'm here to help you take care of your mind and mood.\n")
     time.sleep(1)
 
-    motivational_quotes=[
-        "You are stronger than you think, keep going.",
-        "Even the darkest night will end and the sun will rise.",
-        "Every day may not be good, but there's something good in every day.",
-        "Small steps every day lead to big changes."
-    ]
-
     while True:
-        print(Fore.MAGENTA + "\nWhat would you like to do today?")
-        print(Fore.CYAN + "-"*50)
-        print("1. Predict Depression Level")
-        print("2. View Mental Health Statistics")
-        print("3. Get Self-Care Tips")
-        print("4. Contact a Psychiatrist or Helpline")
-        print("5. Learn About Depression")
-        print("6. Motivational Message")
-        print("7. Exit")
-        print(Fore.CYAN + "-"*50)
-
+        show_menu()
         choice = input(Fore.YELLOW + "\nEnter your choice (1-7): ").strip()
 
-        if choice == '1':
-            sentence = input(Fore.WHITE + "\nPlease describe how you’ve been feeling lately:\n> ")
-            slow_print(Fore.GREEN + "Analyzing your response...")
-            time.sleep(1.5)
-            #has to insert data
-            slow_print(Fore.BLUE + "Prediction result: You might have mild depression.")
-            slow_print(Fore.YELLOW + "It’s okay — you’re not alone. Let’s work on getting better together!\n")
+        if not choice.isdigit() or not (1 <= int(choice) <= 7):
+            print(Fore.RED + "Invalid choice. Please enter a number between 1–7.\n")
+            continue
 
-        elif choice == '2':
-            print(Fore.CYAN + "\nDepression Statistics:")
-            time.sleep(0.5)
-            print(Fore.WHITE + "Mild: 45%")
-            print("Moderate: 35%")
-            print("Severe: 20%")
-            print(Fore.YELLOW + "Remember: Early awareness helps in healing.\n")
+        choice=int(choice)
 
-        elif choice == '3':
-            print(Fore.GREEN + "\nSelf-Care Tips:")
-            tips = [
-                "Sleep 7–8 hours daily.",
-                "Eat healthy and drink plenty of water.",
-                "Go for a short walk outdoors.",
-                "Meditate or breathe deeply for 5 minutes.",
-                "Talk to someone you trust about how you feel."
-            ]
-            for tip in tips:
-                slow_print(Fore.WHITE + "- " + tip)
-                time.sleep(0.4)
-            print()
-
-        elif choice == '4':
-            print(Fore.CYAN + "\nMental Health Helplines (India):")
-            print(Fore.WHITE + "NIMHANS Helpline: 080-4611 0007")
-            print("AASRA Helpline: +91-9820466726")
-            print("Snehi Helpline: +91-9582208181")
-            print("Vandrevala Foundation: 9999 666 555\n")
-            print(Fore.YELLOW + "If you ever feel hopeless, please reach out — help is always available.\n")
-
-        elif choice == '5':
-            print(Fore.GREEN + "\nLearn About Depression:")
-            slow_print(Fore.WHITE + "Depression is a common but serious mental health condition.")
-            slow_print("It affects how you feel, think, and act, but it’s treatable.")
-            slow_print("Symptoms include sadness, fatigue, sleep issues, and low interest.")
-            slow_print(Fore.YELLOW + "Treatment includes therapy, medication, and emotional support.\n")
-
-        elif choice == '6':
-            print(Fore.CYAN + "\nHere’s a motivational message for you:")
-            print(Fore.WHITE + random.choice(motivational_quotes))
-            print(Fore.YELLOW + "Remember: You matter, and your feelings are valid.\n")
-
-        elif choice == '7':
-            slow_print(Fore.CYAN + f"\nThank you for visiting, {name}.Take care of your mind and body.")
-            slow_print(Fore.GREEN + "Remember — small steps make a big difference.")
+        if choice==1:
+            predict_depression(name)
+        elif choice==2:
+            show_statistics()
+        elif choice==3:
+            self_care_tips()
+        elif choice==4:
+            helplines()
+        elif choice==5:
+            learn_about_depression()
+        elif choice==6:
+            motivational_message()
+        elif choice==7:
+            slow_print(Fore.CYAN + f"\nThank you for visiting, {name}. Take care of your mind and body.")
+            slow_print(Fore.GREEN + "Remember — small steps make a big difference.\n")
             break
 
-        else:
-            print(Fore.RED + "Invalid choice. Please choose a number between 1–7.\n")
-
-
-depression_chatbot()
+if __name__ == "__main__":
+    depression_chatbot()
