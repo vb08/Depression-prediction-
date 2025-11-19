@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="form-container">
+    <h2>Depression Questionnaire</h2>
+    <form method="POST">
+        {% for q in questions %}
+            <div class="question-box">
+                <p>{{ loop.index }}. {{ q }}</p>
+                <select name="q{{ loop.index }}">
+                    <option value="0">Never</option>
+                    <option value="1">Sometimes</option>
+                    <option value="2">Often</option>
+                    <option value="3">Always</option>
+                </select>
+            </div>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</div>
+{% endblock %}

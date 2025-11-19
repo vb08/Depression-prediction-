@@ -1,0 +1,69 @@
+mahi: Self-care tips
+Bot: Here are some self-care tips:
+🛌 Sleep 7–8 hours daily
+🥗 Eat healthy and stay hydrated
+🚶 Go for a short walk outdoors
+🧘 Practice mindfulness or meditation
+💬 Talk to someone you trust about your feelings
+
+mahi: Helpline
+Bot: ☎️ Helplines:
+India: NIMHANS 080-4611 0007
+AASRA +91-9820466726
+US: 988 (24/7)
+UK: Samaritans 116 123
+
+mahi: Motivation
+Bot: 🏆 You’ve survived 100% of your bad days!
+
+mahi: hello
+Bot: 💪 You are stronger than you think!
+
+mahi: i am feeling good
+Bot: 😊 Awesome, mahi! Keep taking care of yourself and celebrate small wins! 🎉
+
+mahi: Self-care tips
+Bot: Here are some self-care tips:
+🛌 Sleep 7–8 hours daily
+🥗 Eat healthy and stay hydrated
+🚶 Go for a short walk outdoors
+🧘 Practice mindfulness or meditation
+💬 Talk to someone you trust about your feelings
+
+mahi: Helpline
+Bot: ☎️ Helplines:
+India: NIMHANS 080-4611 0007
+AASRA +91-9820466726
+US: 988 (24/7)
+UK: Samaritans 116 123
+
+mahi: Motivation
+Bot: 🌞 The sun will rise after the darkest night.
+
+mahi: i am feeling good
+Bot: 😊 Awesome, mahi! Keep taking care of yourself and celebrate small wins! 🎉
+
+mahi: i am feeling low
+Bot: 🐾 Small steps lead to big changes.
+
+aman: im sad
+Bot: 💔 aman, I sense some sadness. It's okay to feel this way. Try talking to someone you trust. 🫂
+
+aman: Self-care tips
+Bot: Here are some self-care tips:
+🛌 Sleep 7–8 hours daily
+🥗 Eat healthy and stay hydrated
+🚶 Go for a short walk outdoors
+🧘 Practice mindfulness or meditation
+💬 Talk to someone you trust about your feelings
+
+aman: Helpline
+Bot: ☎️ Helplines:
+India: NIMHANS 080-4611 0007
+AASRA +91-9820466726
+US: 988 (24/7)
+UK: Samaritans 116 123
+
+aman: Motivation
+Bot: 🐾 Small steps lead to big changes.
+

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>{{ title if title else 'Depression Analyzer' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='static.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ======================
+     Header / Navbar
+====================== -->
+<header>
+    <div class="nav-container">
+        <h1><a href="{{ url_for('home') }}">Depression Analyzer 💛</a></h1>
+        {% if session.get('user') %}
+        <nav>
+            <span>Hello, {{ session['user'] }}!</span>
+            <a href="{{ url_for('personal_info') }}">Profile</a>
+            <a href="{{ url_for('chatbot_page') }}">Chatbot</a>
+            <a href="{{ url_for('logout') }}">Logout</a>
+        </nav>
+        {% else %}
+        <nav>
+            <a href="{{ url_for('login') }}">Login</a>
+            <a href="{{ url_for('register') }}">Register</a>
+        </nav>
+        {% endif %}
+    </div>
+</header>
+
+<!-- ======================
+     Main Content
+====================== -->
+<main>
+    {% block content %}
+    <!-- Page specific content goes here -->
+    {% endblock %}
+</main>
+
+<!-- ======================
+     Floating Chatbot Widget
+====================== -->
+<div id="chat-widget">
+    <div id="chat-header" onclick="toggleChat()">💬 Chat with us</div>
+    <div id="chat-body">
+        <div id="chat-messages"></div>
+        <div id="chat-input-area">
+            <input type="text" id="chat-input" placeholder="Type your message..." autocomplete="off">
+            <button onclick="sendChatMessage()">Send</button>
+        </div>
+    </div>
+</div>
+
+<!-- ======================
+     Chatbot JS
+====================== -->
+<script src="{{ url_for('static', filename='chatbot.js') }}" defer></script>
+
+</body>
+</html>
